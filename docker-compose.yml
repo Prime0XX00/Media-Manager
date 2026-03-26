@@ -1,0 +1,37 @@
+version: "3.9"
+
+services:
+    backend:
+        image: prime0xx00/mediamanager3-backend:latest
+        build:
+            context: .
+            dockerfile: Dockerfile.backend
+        expose:
+            - 8000
+        volumes:
+            - static_volume:/app/staticfiles
+        environment:
+            DEBUG: "False"
+            DJANGO_SETTINGS_MODULE: backendapp.settings
+
+        restart: always
+
+    nginx:
+        image: prime0xx00/mediamanager3-frontend:latest
+        build:
+            context: .
+            dockerfile: Dockerfile.frontend
+        volumes:
+            - /media/maxt/hdd:/media/maxt/hdd:ro
+            - static_volume:/static
+        environment:
+            VITE_API_URL: http://localhost:8000
+            VITE_PI_URL: http://localhost
+        depends_on:
+            - backend
+        ports:
+            - "80:80"
+        restart: always
+
+volumes:
+    static_volume:

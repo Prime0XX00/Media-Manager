@@ -1,0 +1,22 @@
+# Verwende ein leichtes Python-Image für ARM-kompatibilität (z. B. Raspberry Pi)
+FROM python:3.12-slim
+
+# Arbeitsverzeichnis im Container
+WORKDIR /app
+
+# Systemabhängigkeiten
+RUN apt-get update && apt-get install -y libpq-dev gcc && rm -rf /var/lib/apt/lists/*
+
+# Abhängigkeiten installieren
+COPY backend/requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Django-Projekt kopieren
+COPY backend/ .
+
+# Exponiere Port 8000 für Gunicorn
+EXPOSE 8000
+
+RUN python manage.py collectstatic --noinput
+
+CMD ["gunicorn", "backendapp.wsgi:application", "--bind", "0.0.0.0:8000"]

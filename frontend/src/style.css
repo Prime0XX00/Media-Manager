@@ -1,0 +1,92 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+	--font-lexend: "Lexend", sans-serif;
+	--spacing-navbar-h: 5rem;
+
+	--color-highlight: var(--color-cyan-700);
+}
+
+html {
+	scrollbar-gutter: stable;
+	--radius: var(--radius-md);
+
+	--color-star: var(--color-highlight);
+	--color-star-empty: var(--color-gray-300);
+
+	/*#region BASE STYLES LIGHTMODE*/
+	--bg: var(--color-gray-100);
+	--fg: var(--color-gray-800);
+	--primary-bg: var(--color-highlight);
+	--primary-fg: var(--color-white);
+
+	--table-h-bg: var(--color-gray-100);
+	--table-h-fg: var(--color-gray-800);
+	--table-b-bg: var(--color-white);
+	--table-f-bg: var(--color-gray-100);
+	--table-f-fg: var(--color-gray-800);
+	--table-border: var(--color-gray-100);
+
+	--scrollbar-track: var(--color-white);
+	--scrollbar-thumb: var(--color-gray-100);
+
+	/*#endregion BASE STYLES LIGHTMODE*/
+}
+
+.dark {
+	--color-star: var(--color-highlight);
+	--color-star-empty: var(--color-gray-700);
+
+	/*#region BASE STYLES DARKMODE*/
+	--bg: var(--color-gray-800);
+	--fg: var(--color-gray-100);
+	--primary-bg: var(--color-highlight);
+	--primary-fg: var(--color-white);
+
+	--table-h-bg: var(--color-gray-800);
+	--table-h-fg: var(--color-gray-100);
+	--table-b-bg: var(--color-gray-900);
+	--table-f-bg: var(--color-gray-800);
+	--table-f-fg: var(--color-gray-100);
+	--table-border: var(--color-gray-800);
+
+	--scrollbar-track: var(--color-gray-900);
+	--scrollbar-thumb: var(--color-gray-800);
+
+	/*#endregion BASE STYLES DARKMODE*/
+}
+
+.wrapper {
+	@apply mx-auto xl:max-w-375 w-full sm:px-5 px-3;
+}
+
+@font-face {
+	font-family: Lexend;
+	font-style: normal;
+	font-weight: 100 200 300 400 500 600 700 800 900;
+	font-display: swap;
+	src: url("/fonts/Lexend.ttf") format("truetype");
+}
+
+@layer utilities {
+	::-webkit-scrollbar {
+		width: 12px;
+	}
+
+	/* Track */
+	::-webkit-scrollbar-track {
+		background: var(--scrollbar-track);
+	}
+
+	/* Handle */
+	::-webkit-scrollbar-thumb {
+		background: var(--scrollbar-thumb);
+	}
+
+	/* Handle on hover */
+	::-webkit-scrollbar-thumb:hover {
+		background: var(--scrollbar-thumb);
+	}
+}

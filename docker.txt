@@ -1,0 +1,3 @@
+docker buildx build --platform linux/amd64,linux/arm64 -t prime0xx00/mediamanager3-backend:latest -f Dockerfile.backend --push .
+
+docker buildx build --platform linux/amd64,linux/arm64 -t prime0xx00/mediamanager3-frontend:latest -f Dockerfile.frontend --push .
